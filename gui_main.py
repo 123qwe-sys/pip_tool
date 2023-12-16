@@ -4,6 +4,13 @@ import threading
 import pip_operation
 import config
 
+if config.use_source_test:
+    import source_test
+
+    Image_source = source_test.Image_source_dict_new
+else:
+    Image_source = config.Image_source_dict
+
 
 class gui:
     def __init__(self):
@@ -18,7 +25,7 @@ class gui:
         self.install_library_button = tk.Button(text='下载包', command=self.install_dispose)
 
         self.install_library_list = tk.Listbox()
-        for item in config.Image_source_dict.keys():
+        for item in Image_source.keys():
             self.install_library_list.insert("end", item)
 
     def install_dispose(self):
